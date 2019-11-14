@@ -2,7 +2,23 @@
     ViewData["Title"] = "Home";
 }
 
+@model Inlamning1_TomBergqvist.Models.ViewModels.CustomerAccountsViewModel
+
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Welcome to the Bank</h1>
+
+    @foreach (var customer in Model.Customers)
+    {
+        <div class="row">
+            <div>@customer.Id. @customer.FirstName @customer.LastName</div>
+        </div>
+        <hr />
+        @foreach (var account in customer.Accounts)
+        {
+            <div class="row">
+                <div class="col-4">@account.Id. @account.Balance Coins</div>
+            </div>
+        }
+        <hr />
+    }
 </div>
