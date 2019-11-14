@@ -10,6 +10,7 @@
     {
         <span>@Model.Message</span>
     }
+    <span asp-validation-for="Amount" class="text-danger"></span>
     <form asp-action="ChangeBalance" asp-controller="Bank" method="post">
         <fieldset>
             <label asp-for="Account">
