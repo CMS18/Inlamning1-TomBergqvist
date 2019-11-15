@@ -26,7 +26,7 @@ namespace Inlamning1_TomBergqvist.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Route("bank")]
+        [Route("Bank")]
         public IActionResult ChangeBalance(ChangeBalanceViewModel model)
         {
             if (ModelState.IsValid)
