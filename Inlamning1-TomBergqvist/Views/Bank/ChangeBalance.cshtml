@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Withdraw/Deposit";
+}
+
+@model Inlamning1_TomBergqvist.Models.ViewModels.ChangeBalanceViewModel
+
+<div class="text-center">
+    <h1 class="display-4">Withdraw/deposit</h1>
+    @if(Model.Message != null)
+    {
+        <span>@Model.Message</span>
+    }
+    <span asp-validation-for="Amount" class="text-danger"></span>
+    <form asp-action="ChangeBalance" asp-controller="Bank" method="post">
+        <fieldset>
+            <label asp-for="Account">
+            </label>
+            <input type="text" asp-for="Account" />
+
+            <label asp-for="Amount">
+            </label>
+            <input type="text" asp-for="Amount" />
+        </fieldset>
+        <input type="submit" asp-for="Mode" value="withdraw"/>
+        <input type="submit" asp-for="Mode" value="deposit"/>
+    </form>
+</div>
