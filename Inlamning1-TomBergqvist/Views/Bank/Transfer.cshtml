@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Transfer";
+}
+
+@model Inlamning1_TomBergqvist.Models.ViewModels.TransferViewModel
+
+<div class="text-center">
+    <h1 class="display-4">Transfer Money</h1>
+    @if (Model.Message != null)
+    {
+        <span>@Model.Message</span>
+    }
+    <span asp-validation-for="Amount" class="text-danger"></span>
+    <form asp-action="Transfer" asp-controller="Bank" method="post">
+        <fieldset>
+            <label asp-for="FromAcc">
+            </label>
+            <input type="text" asp-for="FromAcc" />
+            <label asp-for="ToAcc">
+            </label>
+            <input type="text" asp-for="ToAcc" />
+            <label asp-for="Amount">
+            </label>
+            <input type="text" asp-for="Amount" />
+        </fieldset>
+        <input type="submit" value="Transfer" />
+  
+    </form>
+</div>

@@ -64,5 +64,34 @@ namespace Tests
 
             Assert.Equal(1000, repository.Accounts[0].Balance);
         }
+
+        [Fact]
+        public void Transfer()
+        {
+            repository = new BankRepository();
+
+            var accountOne = new Account(1 , 1 , 1000);
+            var accountTwo = new Account(2, 2, 2000);
+            repository.Accounts.Add(accountOne);
+            repository.Accounts.Add(accountTwo);
+            accountOne.Transfer(accountTwo.Id ,500 ,repository);
+            Assert.Equal(500, accountOne.Balance);
+            Assert.Equal(2500, accountTwo.Balance);
+        }
+
+        [Fact]
+        public void TransferOverLimit()
+        {
+            repository = new BankRepository();
+            var accountOne = new Account(1, 1, 1000);
+            var accountTwo = new Account(2, 2, 2000);
+            repository.Accounts.Add(accountOne);
+            repository.Accounts.Add(accountTwo);
+            accountOne.Transfer(accountTwo.Id, 3500, repository);
+            Assert.Equal(1000, accountOne.Balance);
+            Assert.Equal(2000, accountTwo.Balance);
+
+        }
+
     }
 }
