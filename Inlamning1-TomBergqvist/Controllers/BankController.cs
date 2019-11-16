@@ -43,5 +43,37 @@ namespace Inlamning1_TomBergqvist.Controllers
             }
             return View(model);
         }
+
+        [HttpGet]
+        public IActionResult Transfer()
+        {
+            var model = new TransferViewModel();
+          
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+       
+        public IActionResult Transfer(TransferViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var account = _repository.Accounts.FirstOrDefault(n => n.Id == model.FromAcc);
+
+
+                if(account== null)
+                {
+                    model.Message = "This Account Does Not Exist";
+                }
+                else
+                {
+                    model.Message = account.Transfer(model.ToAcc , model.Amount, _repository);  
+                    
+                }
+            }
+            return View(model);
+        }
+
     }
 }
