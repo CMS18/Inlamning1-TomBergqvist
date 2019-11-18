@@ -18,36 +18,36 @@ namespace Inlamning1_TomBergqvist.Models
             Balance = balance;
         }
 
-        public string Transfer( int toAccount, decimal toTransferAmount , BankRepository bank)
+        public string Transfer(int toAccount, decimal toTransferAmount, BankRepository bank)
         {
             var fromAcc = bank.Accounts.FirstOrDefault(k => k.Id == Id);
             var toAcc = bank.Accounts.FirstOrDefault(k => k.Id == toAccount);
-            if(toAcc == null)
+
+            if (toAcc == null)
             {
-                return "Invalid Reciving Account";
+                return "Invalid Receiving Account.";
             }
             if (fromAcc == null)
             {
-                return "Invalid Sending Account";
+                return "Invalid Sending Account.";
             }
-            if(toAcc == fromAcc)
+            if (toAcc == fromAcc)
             {
-                return " Reciving and Sending Account Can not be the Same";
+                return "Receiving and Sending Account can not be the Same.";
             }
 
-            if (toTransferAmount< 0 )
+            if (toTransferAmount < 0)
             {
-                return "Invalid Amount ";
+                return "Invalid Amount.";
             }
-            if(toTransferAmount > Balance )
+            if (toTransferAmount > Balance)
             {
-                return "Insufficienet Balance ";
+                return "Insufficient Balance.";
             }
 
             bank.Deposit(toAcc.Id, toTransferAmount);
             bank.Withdraw(fromAcc.Id, toTransferAmount);
             return $"Transfered {toTransferAmount} from {Id} to {toAccount} resulting in a balance of {toAcc.Balance}.";
         }
-
     }
 }
